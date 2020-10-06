@@ -33,6 +33,9 @@ type Info struct {
 func Start(logger *logger.Logger, path string, config *Config, uid, gid int, arg ...string) (proc *Info, err error) {
 	cmd := getCmd(logger, path, []string{}, uid, gid, arg...)
 	stdin, err := cmd.StdinPipe()
+	logger.Info("************ RUNNING BINARY *************")
+	logger.Info(cmd)
+	logger.Info("************ RUNNING BINARY *************")
 	if err != nil {
 		return nil, err
 	}

@@ -299,12 +299,12 @@ func Package() {
 		platform string
 		packages string
 	}{
-		{"darwin/amd64", "darwin-x86_64.tar.gz"},
-		{"linux/386", "linux-x86.tar.gz"},
+	//	{"darwin/amd64", "darwin-x86_64.tar.gz"},
+	//	{"linux/386", "linux-x86.tar.gz"},
 		{"linux/amd64", "linux-x86_64.tar.gz"},
-		{"linux/arm64", "linux-arm64.tar.gz"},
-		{"windows/386", "windows-x86.zip"},
-		{"windows/amd64", "windows-x86_64.zip"},
+	//	{"linux/arm64", "linux-arm64.tar.gz"},
+	//	{"windows/386", "windows-x86.zip"},
+	//	{"windows/amd64", "windows-x86_64.zip"},
 	}
 
 	var requiredPackages []string

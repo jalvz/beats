@@ -55,6 +55,16 @@ func Package() error {
 					continue
 				}
 
+				if pkgType == RPM {
+					continue
+				}
+				if pkgType == Deb {
+					continue
+				}
+				if pkgType == Docker {
+					continue
+				}
+
 				packageArch, err := getOSArchName(target, pkgType)
 				if err != nil {
 					log.Printf("Skipping arch %v for package type %v: %v", target.Arch(), pkgType, err)
@@ -63,6 +73,7 @@ func Package() error {
 
 				agentPackageType := TarGz
 				if pkg.OS == "windows" {
+					continue
 					agentPackageType = Zip
 				}
 

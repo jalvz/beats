@@ -145,3 +145,44 @@ func TestExport(t *testing.T) {
 		require.NoError(t, err)
 	}
 }
+
+func TestSerialization2(t *testing.T) {
+		spec := Spec{
+			Name:     "APM-Server",
+			Cmd:      "apm-server",
+			Args:     []string{"-E", "output.elasticsearch.username=admin", "-E", "output.elasticsearch.username=changeme", "-E", "setup.ilm.enabled=false", "-E", "setup.template.enabled=false", "-E", "management.mode=x-pack-fleet", "-E", "management.enabled=true", "-E", "logging.json=false"},
+			Artifact: "apm-server",
+			When: "hasKey(${output}, 'elasticsearch')",
+		}
+		yml := `name: APM-Server
+cmd: apm-server
+args: ["-E", "output.elasticsearch.username=admin", "-E", "output.elasticsearch.username=changeme", "-E", "setup.ilm.enabled=false", "-E", "setup.template.enabled=false", "-E", "management.mode=x-pack-fleet", "-E", "management.enabled=true", "-E", "logging.json=false"]
+artifact: apm-server
+when: hasKey(${output}, 'elasticsearch')
+`
+	b, err := yaml.Marshal(spec)
+	require.NoError(t, err)
+	assert.Equal(t, yml, string(b))
+}
+
+/*
+name: APM-Server
+cmd: apm-server
+args:
+	- -E
+	- output.elasticsearch.username=admin
+	- -E
+	- output.elasticsearch.username=changeme
+	- -E
+	- setup.ilm.enabled=false
+	- -E
+	- setup.template.enabled=false
+	- -E
+	- management.mode=x-pack-fleet
+	- -E
+	- management.enabled=true
+	- -E
+	- logging.json=false
+artifact: apm-server
+when: hasKey(${output}, 'elasticsearch')"
+ */
